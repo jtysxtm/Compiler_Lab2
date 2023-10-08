@@ -1,0 +1,312 @@
+语法
+
+    0 $accept: program $end
+
+    1 program: program END
+    2        | program stmt
+    3        | stmt
+
+    4 stmt: IDENTIFIER ASSIGN expr SEMI
+
+    5 expr: expr ADD expr
+    6     | expr SUB expr
+    7     | expr MUL expr
+    8     | expr DIV expr
+    9     | LEFT expr RIGHT
+   10     | SUB expr
+   11     | NUMBER
+   12     | IDENTIFIER
+
+
+终结语词，附有它们出现处的规则
+
+    $end (0) 0
+    error (256)
+    ADD (258) 5
+    SUB (259) 6 10
+    MUL (260) 7
+    DIV (261) 8
+    UMINUS (262)
+    LEFT (263) 9
+    RIGHT (264) 9
+    NUMBER (265) 11
+    IDENTIFIER (266) 4 12
+    ASSIGN (267) 4
+    SEMI (268) 4
+    END (269) 1
+
+
+非终结语词，附有它们出现处的规则
+
+    $accept (15)
+        on left: 0
+    program (16)
+        on left: 1 2 3
+        on right: 0 1 2
+    stmt (17)
+        on left: 4
+        on right: 2 3
+    expr (18)
+        on left: 5 6 7 8 9 10 11 12
+        on right: 4 5 6 7 8 9 10
+
+
+状态 0
+
+    0 $accept: • program $end
+
+    IDENTIFIER  偏移，并进入状态 1
+
+    program  转到状态 2
+    stmt     转到状态 3
+
+
+状态 1
+
+    4 stmt: IDENTIFIER • ASSIGN expr SEMI
+
+    ASSIGN  偏移，并进入状态 4
+
+
+状态 2
+
+    0 $accept: program • $end
+    1 program: program • END
+    2        | program • stmt
+
+    $end        偏移，并进入状态 5
+    IDENTIFIER  偏移，并进入状态 1
+    END         偏移，并进入状态 6
+
+    stmt  转到状态 7
+
+
+状态 3
+
+    3 program: stmt •
+
+    $default  使用规则 3 以归约 (program)
+
+
+状态 4
+
+    4 stmt: IDENTIFIER ASSIGN • expr SEMI
+
+    SUB         偏移，并进入状态 8
+    LEFT        偏移，并进入状态 9
+    NUMBER      偏移，并进入状态 10
+    IDENTIFIER  偏移，并进入状态 11
+
+    expr  转到状态 12
+
+
+状态 5
+
+    0 $accept: program $end •
+
+    $default  接受
+
+
+状态 6
+
+    1 program: program END •
+
+    $default  使用规则 1 以归约 (program)
+
+
+状态 7
+
+    2 program: program stmt •
+
+    $default  使用规则 2 以归约 (program)
+
+
+状态 8
+
+   10 expr: SUB • expr
+
+    SUB         偏移，并进入状态 8
+    LEFT        偏移，并进入状态 9
+    NUMBER      偏移，并进入状态 10
+    IDENTIFIER  偏移，并进入状态 11
+
+    expr  转到状态 13
+
+
+状态 9
+
+    9 expr: LEFT • expr RIGHT
+
+    SUB         偏移，并进入状态 8
+    LEFT        偏移，并进入状态 9
+    NUMBER      偏移，并进入状态 10
+    IDENTIFIER  偏移，并进入状态 11
+
+    expr  转到状态 14
+
+
+状态 10
+
+   11 expr: NUMBER •
+
+    $default  使用规则 11 以归约 (expr)
+
+
+状态 11
+
+   12 expr: IDENTIFIER •
+
+    $default  使用规则 12 以归约 (expr)
+
+
+状态 12
+
+    4 stmt: IDENTIFIER ASSIGN expr • SEMI
+    5 expr: expr • ADD expr
+    6     | expr • SUB expr
+    7     | expr • MUL expr
+    8     | expr • DIV expr
+
+    ADD   偏移，并进入状态 15
+    SUB   偏移，并进入状态 16
+    MUL   偏移，并进入状态 17
+    DIV   偏移，并进入状态 18
+    SEMI  偏移，并进入状态 19
+
+
+状态 13
+
+    5 expr: expr • ADD expr
+    6     | expr • SUB expr
+    7     | expr • MUL expr
+    8     | expr • DIV expr
+   10     | SUB expr •
+
+    $default  使用规则 10 以归约 (expr)
+
+
+状态 14
+
+    5 expr: expr • ADD expr
+    6     | expr • SUB expr
+    7     | expr • MUL expr
+    8     | expr • DIV expr
+    9     | LEFT expr • RIGHT
+
+    ADD    偏移，并进入状态 15
+    SUB    偏移，并进入状态 16
+    MUL    偏移，并进入状态 17
+    DIV    偏移，并进入状态 18
+    RIGHT  偏移，并进入状态 20
+
+
+状态 15
+
+    5 expr: expr ADD • expr
+
+    SUB         偏移，并进入状态 8
+    LEFT        偏移，并进入状态 9
+    NUMBER      偏移，并进入状态 10
+    IDENTIFIER  偏移，并进入状态 11
+
+    expr  转到状态 21
+
+
+状态 16
+
+    6 expr: expr SUB • expr
+
+    SUB         偏移，并进入状态 8
+    LEFT        偏移，并进入状态 9
+    NUMBER      偏移，并进入状态 10
+    IDENTIFIER  偏移，并进入状态 11
+
+    expr  转到状态 22
+
+
+状态 17
+
+    7 expr: expr MUL • expr
+
+    SUB         偏移，并进入状态 8
+    LEFT        偏移，并进入状态 9
+    NUMBER      偏移，并进入状态 10
+    IDENTIFIER  偏移，并进入状态 11
+
+    expr  转到状态 23
+
+
+状态 18
+
+    8 expr: expr DIV • expr
+
+    SUB         偏移，并进入状态 8
+    LEFT        偏移，并进入状态 9
+    NUMBER      偏移，并进入状态 10
+    IDENTIFIER  偏移，并进入状态 11
+
+    expr  转到状态 24
+
+
+状态 19
+
+    4 stmt: IDENTIFIER ASSIGN expr SEMI •
+
+    $default  使用规则 4 以归约 (stmt)
+
+
+状态 20
+
+    9 expr: LEFT expr RIGHT •
+
+    $default  使用规则 9 以归约 (expr)
+
+
+状态 21
+
+    5 expr: expr • ADD expr
+    5     | expr ADD expr •
+    6     | expr • SUB expr
+    7     | expr • MUL expr
+    8     | expr • DIV expr
+
+    MUL  偏移，并进入状态 17
+    DIV  偏移，并进入状态 18
+
+    $default  使用规则 5 以归约 (expr)
+
+
+状态 22
+
+    5 expr: expr • ADD expr
+    6     | expr • SUB expr
+    6     | expr SUB expr •
+    7     | expr • MUL expr
+    8     | expr • DIV expr
+
+    MUL  偏移，并进入状态 17
+    DIV  偏移，并进入状态 18
+
+    $default  使用规则 6 以归约 (expr)
+
+
+状态 23
+
+    5 expr: expr • ADD expr
+    6     | expr • SUB expr
+    7     | expr • MUL expr
+    7     | expr MUL expr •
+    8     | expr • DIV expr
+
+    $default  使用规则 7 以归约 (expr)
+
+
+状态 24
+
+    5 expr: expr • ADD expr
+    6     | expr • SUB expr
+    7     | expr • MUL expr
+    8     | expr • DIV expr
+    8     | expr DIV expr •
+
+    $default  使用规则 8 以归约 (expr)
