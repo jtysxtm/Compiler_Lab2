@@ -1,0 +1,9 @@
+judy@judy-virtual-machine:~/桌面/Compiler-Lab2/fib$ qemu-arm -L /usr/arm-linux-gnueabihf ./fib.out
+5//输入
+0
+1
+1
+2
+3
+5
+

@@ -1,0 +1,5 @@
+judy@judy-virtual-machine:~/桌面/Compiler-Lab2/max$ qemu-arm -L /usr/arm-linux-gnueabihf ./max.out
+5//输入
+4//输入
+max is: 5
+

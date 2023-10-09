@@ -1,0 +1,12 @@
+judy@judy-virtual-machine:~/桌面/Compiler-Lab2/array_multi$ qemu-arm -L /usr/arm-linux-gnueabihf ./array_multi.out
+Matrix A:
+1 2 3 
+4 5 6 
+Matrix B:
+1 2 
+3 4 
+5 6 
+Result of matrix multiplication:
+22 28 
+49 64 
+

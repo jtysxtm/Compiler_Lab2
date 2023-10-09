@@ -1,0 +1,4 @@
+judy@judy-virtual-machine:~/桌面/Compiler-Lab2/factorial$ qemu-arm -L /usr/arm-linux-gnueabihf ./factorial.out
+5//输入
+120
+
